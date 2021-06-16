@@ -36,84 +36,94 @@ namespace slownik_vol2
                 else
                 {
                     Tools tool = new Tools();
-                    string path = tool.LilPathMaker(tool.OneChs(choice, 0));
-                    if (tool.OtherList(choice).Count != 0)
+                    if (System.IO.Directory.Exists(tool.LilPathMaker(choice)))
                     {
-                        while (true)
+                        string path = tool.LilPathMaker(tool.OneChs(choice, 0));
+                        if (tool.OtherList(choice).Count != 0)
                         {
-                            if (System.IO.Directory.Exists(path))
+                            while (true)
                             {
-                                if (choice.Length > 0)
+                                if (System.IO.Directory.Exists(path))
                                 {
-                                    tool.OtherReadList(tool.OtherList(choice));
-                                    Console.ReadKey();
-                                    Console.WriteLine("\nWybierz słowo, którego definicję chcesz sprawdzić lub dodać.");
-                                    Console.Write("> ");
-                                    string word = Console.ReadLine().ToString().ToLower();
-                                    Console.ReadKey();
-                                    Console.Clear();
-
-                                    if (tool.DoesItExist(word))
+                                    if (choice.Length > 0)
                                     {
-                                        while (true)
-                                        {
-                                            Console.WriteLine("Chcesz je (S)sprawdzić, czy (D)dodać?");
-                                            Console.Write("> ");
-                                            string soz = Console.ReadLine().ToString().ToLower();
-                                            Console.ReadKey();
-                                            Console.Clear();
+                                        tool.OtherReadList(tool.OtherList(choice));
+                                        Console.ReadKey();
+                                        Console.WriteLine("\nWybierz słowo, którego definicję chcesz sprawdzić lub dodać.");
+                                        Console.Write("> ");
+                                        string word = Console.ReadLine().ToString().ToLower();
+                                        Console.ReadKey();
+                                        Console.Clear();
 
-                                            if (soz == "s")
+                                        if (tool.DoesItExist(word))
+                                        {
+                                            while (true)
                                             {
-                                                tool.Definition(word);
+                                                Console.WriteLine("Chcesz je (S)sprawdzić, czy (D)dodać?");
+                                                Console.Write("> ");
+                                                string soz = Console.ReadLine().ToString().ToLower();
                                                 Console.ReadKey();
-                                                break;
-                                            }
-                                            else if (soz == "d")
-                                            {
-                                                while (true)
+                                                Console.Clear();
+
+                                                if (soz == "s")
                                                 {
-                                                    Console.WriteLine("Napisz definicję, którą chciałbyś dodać");
-                                                    Console.Write("> ");
-                                                    string def = Console.ReadLine().ToString().ToLower();
-                                                    Console.WriteLine("Czy pasuje ci ta definicja?(Y/N)");
-                                                    Console.Write("> ");
-                                                    string choi = Console.ReadLine().ToString().ToLower();
-                                                    if (choi == "y")
+                                                    tool.Definition(word);
+                                                    Console.ReadKey();
+                                                    break;
+                                                }
+                                                else if (soz == "d")
+                                                {
+                                                    while (true)
                                                     {
-                                                        tool.WordAdder(word, def);
-                                                        Console.ReadKey();
-                                                        Console.Clear();
-                                                        break;
+                                                        Console.WriteLine("Napisz definicję, którą chciałbyś dodać");
+                                                        Console.Write("> ");
+                                                        string def = Console.ReadLine().ToString().ToLower();
+                                                        Console.WriteLine("Czy pasuje ci ta definicja?(Y/N)");
+                                                        Console.Write("> ");
+                                                        string choi = Console.ReadLine().ToString().ToLower();
+                                                        if (choi == "y")
+                                                        {
+                                                            tool.WordAdder(word, def);
+                                                            Console.ReadKey();
+                                                            Console.Clear();
+                                                            break;
+                                                        }
+                                                        else
+                                                        {
+                                                            Console.WriteLine("Ojojojoojojoj");
+                                                            Console.ReadKey();
+                                                            Console.Clear();
+                                                        }
                                                     }
-                                                    else
-                                                    {
-                                                        Console.WriteLine("Ojojojoojojoj");
-                                                        Console.ReadKey();
-                                                        Console.Clear();
-                                                    }
+                                                    break;
                                                 }
                                                 break;
                                             }
                                             break;
                                         }
-                                        break;
+                                        else
+                                        {
+                                            Console.WriteLine("b a z i n g a");
+                                            Console.ReadKey();
+                                            break;
+                                        }
                                     }
                                     else
                                     {
-                                        Console.WriteLine("b a z i n g a");
+                                        Console.WriteLine("Wygląda na to, że lista jest pusta!");
                                         Console.ReadKey();
+                                        Console.Clear();
                                         break;
                                     }
                                 }
-                                else
-                                {
-                                    Console.WriteLine("Wygląda na to, że lista jest pusta!");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    break;
-                                }
+                                break;
                             }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wygląda na to, że lista jest pusta!");
+                            Console.ReadKey();
+                            Console.Clear();
                             break;
                         }
                     }
@@ -124,8 +134,8 @@ namespace slownik_vol2
                         Console.Clear();
                         break;
                     }
+                    break;
                 }
-                break;
             }
         }
 

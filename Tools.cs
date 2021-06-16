@@ -196,7 +196,8 @@ namespace slownik_vol2
                     {
                         break;
                     }
-                    else {
+                    else 
+                    {
                         continue;
                     }
             }
@@ -210,7 +211,11 @@ namespace slownik_vol2
         public void WordAdder(string name, string def) {
 
             string path = PathMaker(name);
-            if (!System.IO.File.Exists(path))
+            if (!Directory.Exists(LilPathMaker(name)))
+            {
+                Directory.CreateDirectory(LilPathMaker(name));
+            }
+            if (!System.IO.File.Exists(LilPathMaker(name)))
             {
                 try
                 {
